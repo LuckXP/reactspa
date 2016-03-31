@@ -5,3 +5,25 @@ body {
   font: 100% $font-stack;
   background: $primary-color;
 }
+
+.card-size {
+	width: 20%;
+	margin: 10px;
+	padding: 10px;
+}
+
+.fish-img {
+	width: 40%;
+	dispaly: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.fish-list {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.marginbttm {
+	margin-bottom: 10%;
+}

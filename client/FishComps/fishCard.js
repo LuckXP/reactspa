@@ -1,19 +1,17 @@
 var React = require('react');
 
-var FishCard = React.createClass({
-    render: function() {
+function FishCard(props) {
         return (
             <div className="card card-size">
-			  <img className="card-img-top fish-img" src={ this.props.img } alt="Card image cap" />
+			  <img className="card-img-top fish-img" src={ props.img } alt="Card image cap" />
 			  <div className="card-block">
-			    <h4 className="card-title">{ this.props.name }</h4>
-			    <p className="card-text">color: { this.props.color }</p>
-			  	<p className="card-text">Some quick example text</p>
-			  	<p className="card-text">Some quick example text</p>
+			    <h4 className="card-title">{ props.name }</h4>
+			    <p className="card-text">color: { props.color }</p>
+			    <button onClick={ props.getId.bind(null, props.id) } className="btn btn-primary">details</button>
 			  </div>
 			</div>
         )
-    }
-});
+    
+};
 
 module.exports = FishCard;

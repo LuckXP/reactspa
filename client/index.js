@@ -18,7 +18,6 @@ var App = React.createClass({
   	}
   },
   setActiveComponent: function(componentName) {
-  	console.log('found comp', componentName);
   	this.setState({
   		activeComponent: componentName
   	})

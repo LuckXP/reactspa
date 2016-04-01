@@ -8,7 +8,7 @@ var NavBar = React.createClass({
         var self = this;
         var link = links.map(function(alink) {
 	    	return (
-	    		<li className="nav-item active">
+	    		<li className="nav-item active" key={alink}>
 				    <a className="nav-link" 
 				    onClick={ self.props.setActiveComponent.bind(null, alink)}>{ alink } <span className="sr-only">(current)</span></a>
 				</li>

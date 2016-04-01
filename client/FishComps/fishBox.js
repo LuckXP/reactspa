@@ -1,6 +1,8 @@
 var React = require('react');
-var FishList = require('./fishList');
-var FishForm = require('./fishForm');
+
+var FishListData = require('./fishListData');
+var FishFormData = require('./fishFormData');
+var FishDetailsData = require('./fishDetailsData');
 
 
 var Toggler = React.createClass({
@@ -19,24 +21,31 @@ var Toggler = React.createClass({
 var FishBox = React.createClass({
     getInitialState: function() {
     	return {
-    		activeComponent: 'fish'
+    		activeComponent: 'fish',
+    		activeFishId: null
     		}
+    },
+    getId: function(id) {
+    	return this.setState({ activeFishId: id, activeComponent: 'oneFish'})
     },
     showComp: function() {
     	if(this.state.activeComponent === 'fish') {
-    		return <FishList FishArray={ this.props.FishArray } />
+    		return <FishListData getId = { this.getId } />
 
     	} else if(this.state.activeComponent === 'form') {
-	    	return <FishForm submitFishToServer={ this.props.submitFishToServer } />
+	    	return <FishFormData toggleActiveComp={ this.toggleActiveComp }/>
+	    
+	    } else if(this.state.activeComponent === 'oneFish' ) {
+	    	return <FishDetailsData id={ this.state.activeFishId } />
+
 	    } else {
-	    	return  <FishList FishArray={ this.props.FishArray } />
+	    	throw new Error("Invalid activeComponent ", this.state.activeComponent)
 	    }
     },
     toggleActiveComp: function(name) {
     	this.setState({activeComponent: name})
     },
     render: function() {
-        console.log('found the fish', this.props.FishArray);
         return (
             <div className="container marginbttm">
             	<Toggler toggleActiveComp={ this.toggleActiveComp }/>

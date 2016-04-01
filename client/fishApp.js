@@ -1,5 +1,7 @@
 var React = require('react');
 var FishBox = require('./FishComps/fishBox')
+var Loader = require('./loader')
+
 
 var Jumbotron = React.createClass({
     render: function() {
@@ -17,59 +19,15 @@ var Jumbotron = React.createClass({
     }
 
 });
-var Loader = React.createClass({
-    render: function() {
-        return (
-            <div className="container">
-              <i className="fa-spin fa fa-spinner fa-6"></i>
-            </div>
-        )
-    }
 
-});
 var FishApp = React.createClass({
-    getInitialState: function() {
-    	return {
-    		FishArray: null
-    	}
-    },
-    LoadAllFishFromServer: function() {
-    	var self = this;
-    	$.ajax({
-    		url: '/api/fish' ,
-    		method: 'GET',
-    	}).done(function(data){
-    		self.setState({
-    			FishArray: data
-    		})
-    	})
-    },
-    componentDidMount: function() {
-    	this.LoadAllFishFromServer();
-    },
-    submitFishToServer: function(fishData) {
-    	console.log("this is from fishApp: ", fishData);
-    	var self = this;
-    	$.ajax({
-    		url: '/api/fish' ,
-    		method: 'POST',
-    		data: fishData
-    	}).done(
-    		self.LoadAllFishFromServer()
-    	)
-    },
     render: function() {
-		if(this.state.FishArray) {
-			return (
-				<div>
-					<Jumbotron />
-					<FishBox FishArray={ this.state.FishArray } submitFishToServer={ this.submitFishToServer }/>
-            	</div>
-            )
-        } else {
-        	return <Loader />
-        }
-        
+		return (
+			<div>
+				<Jumbotron />
+				<FishBox submitFishToServer={ this.submitFishToServer }/>
+        	</div>
+        )   
     }
 
 });

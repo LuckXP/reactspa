@@ -1,26 +1,31 @@
 var React = require('react');
 var FishCard= require('./fishCard');
 
-var FishList = React.createClass({
-    render: function() {
-        console.log('fishlist is getting its data', this.props.FishArray);
-        var fishList = this.props.FishArray.map(function(item) {
-        	return (
+function FishList(props) {
+        console.log(props.getId, 'see! fish list has this')
+        var allFish = props.fishArray.map(item => {
+        	
+            return (
         		<FishCard 
-        			name = { item.name }
+        			getId = { props.getId }
+                    id = { item._id }
+                    key= { item._id }
+                    name = { item.name }
         			color = { item.color }
         			people_eater = { item.people_eater }
         			length = { item.length }
         			img = { item.img } />
         	);
-        })
+        });
         return (
         	<div className="fish-list">
-        		{ fishList }
+        		{ allFish }
         	</div>
         )
-    }
+    
 
-});
+};
+
+
 
 module.exports = FishList;

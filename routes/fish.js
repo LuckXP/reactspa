@@ -40,13 +40,34 @@ router.route('/oneFish/:fish_id')
 			}
 		})
 	})
-	
-	.delete(function(req, res) {
-		Fish.remove(req.params.fish_id, function(err, fish) { 
+	.put(function(req, res) {
+		Fish.findById(req.params.fish_id, function(err, fish) { 
+			
 			if(err) {
 				res.status(500).send('Something broke!');
 			} else {
-				res.json(fish);
+				fish.name = req.body.name ? req.body.name : fish.name;
+				fish.color = req.body.color ? req.body.color : fish.color;
+				fish.people_eater = req.body.people_eater ? req.body.people_eater : fish.people_eater;
+				fish.length = req.body.length ? req.body.length : fish.length;
+				fish.img = req.body.img ? req.body.img : fish.img;
+
+				fish.save(function(err) {
+					if(err) {
+						res.status(500).send('Something broke!');
+					} else {
+						res.send("your fish was edited");
+					}
+				})
+			}
+		})
+	})
+	.delete(function(req, res) {
+		Fish.remove({_id: req.params.fish_id}, function(err, fish) { 
+			if(err) {
+				res.status(500).send('Something broke!');
+			} else {
+				res.json("fish was deleted");
 			}
 		})
 	})

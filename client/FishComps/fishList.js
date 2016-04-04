@@ -7,7 +7,8 @@ function FishList(props) {
         	
             return (
         		<FishCard 
-        			getId = { props.getId }
+        			deleteFish = { props.deleteFish }
+                    getId = { props.getId }
                     id = { item._id }
                     key= { item._id }
                     name = { item.name }

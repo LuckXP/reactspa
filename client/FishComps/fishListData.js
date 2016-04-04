@@ -8,6 +8,21 @@ var FishListData = React.createClass({
     		allFish: null
     	}
     },
+    contextTypes: {
+        sendNotification: React.PropTypes.func.isRequired
+    },
+    deleteFish: function(id) {
+        var self = this;
+        if( confirm('delete this fish')) {
+            $.ajax({
+                url: '/api/fish/oneFish/' + id,
+                method: 'DELETE'
+            }).done(function() {
+                self.LoadAllFishFromServer();
+                self.context.sendNotification("you deleted a fish");
+            });
+        }
+    },
     LoadAllFishFromServer: function() {
     	var self = this;
     	$.ajax({
@@ -23,7 +38,7 @@ var FishListData = React.createClass({
     	this.LoadAllFishFromServer();
     },
     render: function() {
-    	return this.state.allFish ? <FishList fishArray={ this.state.allFish } getId={ this.props.getId } /> : <Loader />
+    	return this.state.allFish ? <FishList fishArray={ this.state.allFish } getId={ this.props.getId } deleteFish={ this.deleteFish } /> : <Loader />
     },
 
 });

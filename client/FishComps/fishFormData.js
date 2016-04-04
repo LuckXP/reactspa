@@ -13,6 +13,9 @@ var FishFormData = React.createClass({
     		fishImg: null
     	}
     },
+    contextTypes: {
+        sendNotification: React.PropTypes.func.isRequired
+    },
     onNameChange: function(event) {
     	this.setState({ fishName: event.target.value })
     },
@@ -46,6 +49,7 @@ var FishFormData = React.createClass({
     		data: fishData
     	}).done( function() {
     		self.props.toggleActiveComp('fish');
+            self.context.sendNotification("you add a fish");
 		})
     },
     render: function() {
